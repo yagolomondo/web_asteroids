@@ -32,7 +32,7 @@ function HandleKeyDown(e){
 
 function HandleKeyUp(e){
   keys[e.keyCode] = false;
-  if (e.keyCode === 32){
+  if (e.keyCode === 80){
     bullets.push(new Bullet(ship.angle));
   }
 }
@@ -216,6 +216,17 @@ function Render() {
     ctx.fillStyle = 'white';
     ctx.font = '50px Arial';
     ctx.fillText("GAME OVER", canvasWidth / 2 - 150, canvasHeight / 2);
+  }
+  if(asteroids.length === 0){
+    ship.x = canvasWidth / 2;
+    ship.y = canvasHeight / 2;
+    ship.velX = 0;
+    ship.velY = 0;
+    for(let i = 0; i < 8; i++){
+      let asteroid = new Asteroid();
+      asteroid.speed += .5;
+      asteroids.push(asteroid);
+    }
   }
   DrawLifeShips();
   if (asteroids.length !== 0) {
